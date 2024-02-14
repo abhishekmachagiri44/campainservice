@@ -26,6 +26,7 @@ jobs:
       # Run dotnet build and publish
       - name: dotnet build and publish
         run: |
+          mkdir '${{ github.workspace }}\app' 
           dotnet restore
           dotnet build --configuration Release
           dotnet publish "Test.API/Test.API.csproj" -c Release --property:PublishDir='${{ github.workspace }}\app' 

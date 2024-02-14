@@ -34,6 +34,7 @@ jobs:
       - name: Zip MDM Build artifacts
         run: |
           ls
+          ls ${{ github.workspace }}/app
           Compress-Archive -Path "${{ github.workspace }}\app\*" -DestinationPath "Test.API\publish\publish.zip" -Force 
       - name: zip publish folder
         uses: actions/upload-artifact@v4

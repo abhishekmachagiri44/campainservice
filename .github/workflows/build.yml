@@ -37,7 +37,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Artifacts
-          path: "${{ github.workspace }}\publish.zip"
+          path: "${{ github.workspace }}/publish.zip"
           
       # # Deploy to Azure Web apps
       # - name: 'Run Azure webapp deploy action using publish profile credentials'

@@ -31,15 +31,15 @@ jobs:
           dotnet publish "Test.API/Test.API.csproj" -c Release --property:PublishDir='${{ github.workspace }}\app' 
           ls
           
-      - name: Zip MDM Build artifacts
-        run: |
-          cd '${{ github.workspace }}/app'
-          Compress-Archive -Path ./* -DestinationPath "${{ github.workspace }}\publish.zip" -Force 
+      # - name: Zip MDM Build artifacts
+      #   run: |
+      #     cd '${{ github.workspace }}/app'
+      #     Compress-Archive -Path ./* -DestinationPath "${{ github.workspace }}\publish.zip" -Force 
       - name: zip publish folder
         uses: actions/upload-artifact@v4
         with:
           name: Artifacts
-          path: "${{ github.workspace }}/publish.zip"
+          path: "${{ github.workspace }}/app"
           
       # # Deploy to Azure Web apps
       # - name: 'Run Azure webapp deploy action using publish profile credentials'

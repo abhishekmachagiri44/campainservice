@@ -29,9 +29,12 @@ jobs:
           dotnet restore
           dotnet build --configuration Release
           dotnet publish "Test.API/Test.API.csproj" -c Release --property:PublishDir='${{ github.workspace }}\app' 
-
+          ls
+          
       - name: Zip MDM Build artifacts
-        run: Compress-Archive -Path "${{ github.workspace }}\app\*" -DestinationPath "Test.API\publish\publish.zip" -Force 
+        run: |
+          ls
+          Compress-Archive -Path "${{ github.workspace }}\app\*" -DestinationPath "Test.API\publish\publish.zip" -Force 
       - name: zip publish folder
         uses: actions/upload-artifact@v4
         with:

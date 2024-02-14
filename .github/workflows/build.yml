@@ -4,7 +4,7 @@ on:
   push:
     branches: [ master ]
     paths:
-      - 'Test.API/**'
+      - 'Test.API/'
 
 # env:
 #   AZURE_WEBAPP_NAME: my-app-name    # set this to your application's name

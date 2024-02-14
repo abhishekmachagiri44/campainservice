@@ -27,8 +27,16 @@ jobs:
       - name: dotnet build and publish
         run: |
           dotnet restore
-          # dotnet build --configuration Release
-          msbuild.exe ${{ github.workspace }}\Test.API\Test.API.csproj /p:PublishUrl="${{ github.workspace }}\app"
+          dotnet build --configuration Release
+          dotnet publish "Test.API/Test.API.csproj" -c Release --property:PublishDir='${{ github.workspace }}\app' 
+
+      - name: Zip MDM Build artifacts
+        run: Compress-Archive -Path "${{ github.workspace }}\app\*" -DestinationPath "${{ github.workspace }}\app.zip"
+      - name: zip publish folder
+        uses: actions/upload-artifact@v4
+        with:
+          name: Artifacts
+          path: "${{ github.workspace }}\app.zip"
           
       # # Deploy to Azure Web apps
       # - name: 'Run Azure webapp deploy action using publish profile credentials'

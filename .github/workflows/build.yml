@@ -35,7 +35,7 @@ jobs:
       #   run: |
       #     cd '${{ github.workspace }}/app'
       #     Compress-Archive -Path ./* -DestinationPath "${{ github.workspace }}\publish.zip" -Force 
-      # - name: zip publish folder
+      # - name: zip publish folders
       #   uses: actions/upload-artifact@v4
       #   with:
       #     name: Artifacts

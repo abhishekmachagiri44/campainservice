@@ -43,6 +43,7 @@ jobs:
         with:
           name: Artifacts
           path: "${{ github.workspace }}/app"
+          compression-level: 9
           
       # # Deploy to Azure Web apps
       # - name: 'Run Azure webapp deploy action using publish profile credentials'

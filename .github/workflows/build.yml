@@ -47,10 +47,14 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Artifacts
-          path: |
-            ${{ github.workspace }}/app
-            ${{ github.workspace }}/version.txt
+          path: "${{ github.workspace }}/app"
           compression-level: 9
+
+      - name: Upload file
+        uses: actions/upload-artifact@v4
+        with:
+          name: Artifacts
+          path: "${{ github.workspace }}/version.txt"  
           
       # # Deploy to Azure Web apps
       # - name: 'Run Azure webapp deploy action using publish profile credentials'

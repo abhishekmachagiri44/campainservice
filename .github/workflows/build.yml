@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - 'master'
-    paths:
-      - 'Test.API/**'
 
 # env:
 #   AZURE_WEBAPP_NAME: my-app-name    # set this to your application's name
@@ -33,18 +31,18 @@ jobs:
         run: |
           dotnet restore
           dotnet build --configuration Release
-          dotnet publish "Test.API/Test.API.csproj" -c Release --property:PublishDir='${{ github.workspace }}\app' 
+          dotnet publish "Test2.API/Test.API.csproj" -c Release --property:PublishDir='${{ github.workspace }}\app' 
           ls ${{ github.workspace }}\app
           
       # - name: Zip MDM Build artifacts
       #   run: |
       #     cd '${{ github.workspace }}/app'
       #     Compress-Archive -Path ./* -DestinationPath "${{ github.workspace }}\publish.zip" -Force 
-      # - name: zip publish folder
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: Artifacts
-      #     path: "${{ github.workspace }}/app"
+      - name: zip publish folder
+        uses: actions/upload-artifact@v4
+        with:
+          name: Artifacts
+          path: "${{ github.workspace }}/app"
           
       # # Deploy to Azure Web apps
       # - name: 'Run Azure webapp deploy action using publish profile credentials'

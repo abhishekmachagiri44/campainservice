@@ -1,11 +1,10 @@
 name: .NET Core CI
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - 'master'
-    paths:
-      - 'Test2.API/**'
 
 # env:
 #   AZURE_WEBAPP_NAME: my-app-name    # set this to your application's name
@@ -14,27 +13,35 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       # Checkout the repo
       - uses: actions/checkout@v4
+
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: mArtifacts
+          github-token: ${{ secrets.GH_PAT }} # token with actions:read permissions on target repo
+          repository: AnandSamalad/campaign-microservice
+          # run-id: 1234
       
       # Setup .NET Core SDK
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 6.0 
-      - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v1
+      # - name: Setup .NET Core
+      #   uses: actions/setup-dotnet@v4
+      #   with:
+      #     dotnet-version: 6.0 
+      # - name: Setup MSBuild
+      #   uses: microsoft/setup-msbuild@v1
       
       # Run dotnet build and publish
-      - name: dotnet build and publish
-        run: |
-          dotnet restore
-          dotnet build --configuration Release
-          dotnet publish "Test2.API/Test.API.csproj" -c Release --property:PublishDir='${{ github.workspace }}\app' 
-          ls ${{ github.workspace }}\app
+      # - name: dotnet build and publish
+      #   run: |
+      #     dotnet restore
+      #     dotnet build --configuration Release
+      #     dotnet publish "Test.API/Test.API.csproj" -c Release --property:PublishDir='${{ github.workspace }}\app' 
+      #     ls ${{ github.workspace }}\app
           
       # - name: Zip MDM Build artifacts
       #   run: |

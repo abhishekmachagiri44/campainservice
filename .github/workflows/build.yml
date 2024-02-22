@@ -37,7 +37,7 @@ jobs:
       - name : Echo Build Details
         run: |
           touch ${{ github.workspace }}/version.txt
-          echo $ {{ github.run_id}} >> ${{ github.workspace }}/version.txt
+          echo ${{ github.run_id }} >> ${{ github.workspace }}/version.txt
           
       # - name: Zip MDM Build artifacts
       #   run: |
@@ -47,14 +47,10 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Artifacts
-          path: "${{ github.workspace }}/app"
+          path: | 
+            ${{ github.workspace }}/app
+            ${{ github.workspace }}/version.txt
           compression-level: 9
-
-      - name: Upload file
-        uses: actions/upload-artifact@v4
-        with:
-          name: Artifacts
-          path: "${{ github.workspace }}/version.txt"  
           
       # # Deploy to Azure Web apps
       # - name: 'Run Azure webapp deploy action using publish profile credentials'

@@ -48,8 +48,8 @@ jobs:
         with:
           name: Artifacts
           path: |
-            "${{ github.workspace }}/app"
-            "${{ github.workspace }}/version.txt"
+            ${{ github.workspace }}/app
+            ${{ github.workspace }}/version.txt
           compression-level: 9
           
       # # Deploy to Azure Web apps

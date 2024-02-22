@@ -33,6 +33,11 @@ jobs:
           dotnet build --configuration Release
           dotnet publish "Test2.API/Test.API.csproj" -c Release --property:PublishDir='${{ github.workspace }}\app' 
           ls ${{ github.workspace }}\app
+
+      - name : Echo Build Details
+        run: |
+          touch ${{ github.workspace }}/version.txt
+          echo $ {{ github.run_id}} >> ${{ github.workspace }}/version.txt
           
       # - name: Zip MDM Build artifacts
       #   run: |
@@ -42,7 +47,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Artifacts
-          path: "${{ github.workspace }}/app"
+          path: |
+            "${{ github.workspace }}/app"
+            "${{ github.workspace }}/version.txt"
           compression-level: 9
           
       # # Deploy to Azure Web apps

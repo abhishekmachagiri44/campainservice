@@ -25,7 +25,7 @@ jobs:
           name: Artifacts
           github-token: ${{ secrets.GH_TOKEN2 }} # token with actions:read permissions on target repo
           repository: AnandSamalad/campaign-microservice
-          run-id: 7999628908
+          # run-id: 7999628908
       
       # Setup .NET Core SDK
       # - name: Setup .NET Core

@@ -1,10 +1,10 @@
-name: .NET Core CI
+name: Deploy
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - 'master'
+  # push:
+  #   branches:
+  #     - 'master'
 
 # env:
 #   AZURE_WEBAPP_NAME: my-app-name    # set this to your application's name
@@ -22,8 +22,8 @@ jobs:
       - name: Download Artifacts
         uses: actions/download-artifact@v4
         with:
-          name: mArtifacts
-          github-token: ${{ secrets.GH_PAT }} # token with actions:read permissions on target repo
+          name: Artifacts
+          github-token: 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 # token with actions:read permissions on target repo
           repository: AnandSamalad/campaign-microservice
           # run-id: 1234
       

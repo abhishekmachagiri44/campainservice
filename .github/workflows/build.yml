@@ -35,28 +35,29 @@ jobs:
           dotnet publish "Test2.API/Test.API.csproj" -c Release --property:PublishDir='${{ github.workspace }}\app' 
           ls ${{ github.workspace }}\app
 
-      - name : Echo Build Details
-        run: |
-          touch ${{ github.workspace }}/version.txt
-          echo ${{ github.run_id }} >> ${{ github.workspace }}/version.txt
-          
-      # - name: Zip MDM Build artifacts
+      # - name : Echo Build Details
       #   run: |
-      #     cd '${{ github.workspace }}/app'
-      #     Compress-Archive -Path ./* -DestinationPath "${{ github.workspace }}\publish.zip" -Force 
-      - name: zip publish folder
-        uses: actions/upload-artifact@v4
-        with:
-          name: Artifacts
-          path: | 
-            ${{ github.workspace }}/app
-            ${{ github.workspace }}/version.txt
-          compression-level: 9
+      #     touch ${{ github.workspace }}/version.txt
+      #     echo ${{ github.run_id }} >> ${{ github.workspace }}/version.txt
           
-      # # Deploy to Azure Web apps
-      # - name: 'Run Azure webapp deploy action using publish profile credentials'
-      #   uses: azure/webapps-deploy@v3
-      #   with: 
-      #     app-name: ${{ env.AZURE_WEBAPP_NAME }} # Replace with your app name
-      #     publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE  }} # Define secret variable in repository settings as per action documentation
-      #     package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
+      - name: Zip MDM Build artifacts
+        run: |
+          cd '${{ github.workspace }}/app'
+          Compress-Archive -Path ./* -DestinationPath "${{ github.workspace }}\publish.zip" -Force 
+          
+      # - name: zip publish folder
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: Artifacts
+      #     path: | 
+      #       ${{ github.workspace }}/app
+      #       ${{ github.workspace }}/version.txt
+      #     compression-level: 9
+          
+      # Deploy to Azure Web apps
+      - name: 'Run Azure webapp deploy action using publish profile credentials'
+        uses: azure/webapps-deploy@v3
+        with: 
+          app-name: ${{ env.AZURE_WEBAPP_NAME }} # Replace with your app name
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE  }} # Define secret variable in repository settings as per action documentation
+          package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
